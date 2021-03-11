@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
         _controller = GetComponent<CharacterController>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         CalculateMovement();
     }
