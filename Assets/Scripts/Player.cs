@@ -23,7 +23,10 @@ public class Player : MonoBehaviour
 
     private UIManager _uiManager;
 
-    public int Coins { get; }
+    public int Coins { get => _coins; }
+
+    [SerializeField]
+    private GameObject _weapon;
 
 
     void Start()
@@ -39,7 +42,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Input.GetMouseButton(0) && _currentAmmo > 0)
+        if (Input.GetMouseButton(0) && _currentAmmo > 0 && _weapon.activeSelf)
         {
             Shoot();
         }
@@ -105,5 +108,15 @@ public class Player : MonoBehaviour
     public void AddCoins(int coins)
     {
         _coins += coins;
+    }
+
+    public void SubtractCoins(int coins)
+    {
+        _coins -= coins;
+    }
+
+    public void EnableWeapon()
+    {
+        _weapon.SetActive(true);
     }
 }

@@ -16,14 +16,12 @@ public class Coin : MonoBehaviour
             Player player = other.GetComponent<Player>();
             if (player != null)
             {
-                int coins = player.Coins + _amount;
                 player.AddCoins(_amount);
                 AudioSource.PlayClipAtPoint(_audioCoinPickup, transform.position, 1f);
                 UIManager uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
                 if (uiManager != null)
                 {
-                    Debug.Log(player.Coins);
-                    uiManager.CollectCoin(coins);
+                    uiManager.CollectCoins(player.Coins);
                 }
 
                 Destroy(this.gameObject);
