@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     private int _coins;
 
     private UIManager _uiManager;
+    private InputManager _inputManager;
 
     public int Coins { get => _coins; }
 
@@ -32,6 +33,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        _inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
         _controller = GetComponent<CharacterController>();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -93,12 +95,11 @@ public class Player : MonoBehaviour
 
     void CalculateMovement()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        float horizontalInput = Input.GetAxis(_inputManager.HorizontalAxis);
+        float verticalInput = Input.GetAxis(_inputManager.VerticalAxis);
         Vector3 direction = new Vector3(horizontalInput, 0, verticalInput);
         Vector3 velocity = direction * _speed;
         velocity.y -= _gravity;
-
         velocity = transform.transform.TransformDirection(velocity);
         _controller.Move(velocity * Time.deltaTime);
     }
